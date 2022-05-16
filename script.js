@@ -55,14 +55,17 @@ function displayBook(book) {
     newBook.appendChild(bookPages);
 
     // Displays if you have read the book
-    let bookRead = document.createElement('p');
+    let bookReadBtn = document.createElement('button');
     if (book.read === true) {
-        bookRead.textContent = "have read";
+        bookReadBtn.textContent = "Have read";
+        bookReadBtn.classList.add('read');
     }
     else {
-        bookRead.textContent = "have not read";
+        bookReadBtn.textContent = "Have not read";
+        bookReadBtn.classList.add('not-read');
     }
-    newBook.appendChild(bookRead);
+    bookReadBtn.addEventListener('click', toggleRead);
+    newBook.appendChild(bookReadBtn);
 
     // Adds delete button
     let deleteBtn = document.createElement('button');
@@ -87,8 +90,17 @@ function deleteCard(e) {
     }
 }
 
-function changeReadStatus(e) {
-
+function toggleRead(e) {
+    if (e.currentTarget.textContent == 'Have read') {
+        e.currentTarget.textContent = 'Have not read';
+        e.currentTarget.classList.remove('read');
+        e.currentTarget.classList.add('not-read');
+    }
+    else {
+        e.currentTarget.textContent = 'Have read';
+        e.currentTarget.classList.remove('not-read');
+        e.currentTarget.classList.add('read');
+    }
 }
 
 function openForm() {
